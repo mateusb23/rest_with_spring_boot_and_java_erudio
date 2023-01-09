@@ -10,6 +10,7 @@ import br.com.erudio.data.vo.v1.PersonVO;
 import br.com.erudio.data.vo.v2.PersonVOV2;
 import br.com.erudio.exceptions.ResourceNotFoundException;
 import br.com.erudio.mapper.DozerMapper;
+import br.com.erudio.mapper.custom.PersonMapper;
 import br.com.erudio.model.Person;
 import br.com.erudio.repositories.PersonRepository;
 
@@ -20,6 +21,8 @@ public class PersonServices {
 	
 	@Autowired
 	private PersonRepository personRepository;
+	@Autowired
+	private PersonMapper personMapper;
 
 	public List<PersonVO> findAll() {
 
@@ -49,8 +52,8 @@ public class PersonServices {
 	public PersonVOV2 createV2(PersonVOV2 personVOV2) {
 
 		logger.info("Creating one person!");
-		var entity = DozerMapper.parseObject(personVOV2, Person.class);
-		var vo = DozerMapper.parseObject(personRepository.save(entity), PersonVOV2.class);
+		var entity = personMapper.convertVOToEntity(personVOV2);
+		var vo = personMapper.convertEntityToVO(personRepository.save(entity));
 		
 		return vo;
 	}
