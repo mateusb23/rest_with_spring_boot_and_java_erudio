@@ -51,7 +51,7 @@ public class PersonServices {
 	
 	public PersonVOV2 createV2(PersonVOV2 personVOV2) {
 
-		logger.info("Creating one person!");
+		logger.info("Creating one person with V2!");
 		var entity = personMapper.convertVOToEntity(personVOV2);
 		var vo = personMapper.convertEntityToVO(personRepository.save(entity));
 		
@@ -76,11 +76,11 @@ public class PersonServices {
 	
 	public void delete(Long id) {
 		
+		logger.info("Deleting one person!");
+		
 		var entity = personRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 		
 		personRepository.delete(entity);
-		
-		logger.info("Deleting one person!");
 	}
 
 }

@@ -13,7 +13,7 @@ public class PersonVOV2 implements Serializable {
 	private String lastName;
 	private String address;
 	private String gender;
-	private Date birthday;
+	private Date birthDay;
 	
 	public PersonVOV2() {}
 
@@ -58,16 +58,16 @@ public class PersonVOV2 implements Serializable {
 	}
 	
 	public Date getBirthday() {
-		return birthday;
+		return birthDay;
 	}
 
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
+	public void setBirthday(Date birthDay) {
+		this.birthDay = birthDay;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(address, birthday, firstName, gender, id, lastName);
+		return Objects.hash(address, birthDay, firstName, gender, id, lastName);
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class PersonVOV2 implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		PersonVOV2 other = (PersonVOV2) obj;
-		return Objects.equals(address, other.address) && Objects.equals(birthday, other.birthday)
+		return Objects.equals(address, other.address) && Objects.equals(birthDay, other.birthDay)
 				&& Objects.equals(firstName, other.firstName) && Objects.equals(gender, other.gender)
 				&& Objects.equals(id, other.id) && Objects.equals(lastName, other.lastName);
 	}
