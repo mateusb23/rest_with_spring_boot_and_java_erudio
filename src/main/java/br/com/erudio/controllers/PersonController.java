@@ -26,31 +26,31 @@ public class PersonController {
 	@Autowired
 	private PersonServices personServices;
 	
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public List<PersonVO> findAll() {
 		return personServices.findAll();
 	}
 	
-	@GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public PersonVO findById(@PathVariable(value = "id") Long id) {
 		return personServices.findById(id);
 	}
 	
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-				 produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE },
+				 produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public PersonVO create(@RequestBody PersonVO personVO) {
 		return personServices.create(personVO);
 	}
 	
-	@PostMapping(value = "/v2", consumes = MediaType.APPLICATION_JSON_VALUE,
-			 				    produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/v2", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE },
+			 				    produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public PersonVOV2 createV2(@RequestBody PersonVOV2 personVOV2) {
 		return personServices.createV2(personVOV2);
 	}
 	
 	@PutMapping(value = "/{id}",
-				consumes = MediaType.APPLICATION_JSON_VALUE,
-				produces = MediaType.APPLICATION_JSON_VALUE)
+				consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE },
+				produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public PersonVO update(@PathVariable(value = "id") Long id, @RequestBody PersonVO personVO) {
 		return personServices.update(personVO);
 	}
