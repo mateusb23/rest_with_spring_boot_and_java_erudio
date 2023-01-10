@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.stereotype.Service;
 
+import br.com.erudio.controllers.PersonController;
 import br.com.erudio.data.vo.v1.PersonVO;
 import br.com.erudio.data.vo.v2.PersonVOV2;
 import br.com.erudio.exceptions.ResourceNotFoundException;
@@ -37,7 +40,10 @@ public class PersonServices {
 		
 		var entity = personRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 		
-		return DozerMapper.parseObject(entity, PersonVO.class);
+		PersonVO vo = DozerMapper.parseObject(entity, PersonVO.class);
+		vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
+		
+		return vo;
 	}
 	
 	public PersonVO create(PersonVO personVO) {
@@ -62,7 +68,7 @@ public class PersonServices {
 		
 		logger.info("Updating one person!");
 		
-		var entity = personRepository.findById(personVO.getId()).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
+		var entity = personRepository.findById(personVO.getKey()).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 		
 		entity.setFirstName(personVO.getFirstName());
 		entity.setLastName(personVO.getLastName());

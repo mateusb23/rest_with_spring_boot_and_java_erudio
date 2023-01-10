@@ -48,9 +48,8 @@ public class PersonController {
 		return personServices.createV2(personVOV2);
 	}
 	
-	@PutMapping(value = "/{id}",
-				consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML},
-				produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
+	@PutMapping(value = "/{id}", consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML},
+								 produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
 	public PersonVO update(@PathVariable(value = "id") Long id, @RequestBody PersonVO personVO) {
 		return personServices.update(personVO);
 	}
